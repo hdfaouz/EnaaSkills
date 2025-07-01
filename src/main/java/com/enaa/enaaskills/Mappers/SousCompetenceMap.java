@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SousCompetenceMap {
+
     SousCompetence toEntity(SousCompetenceDto dto);
 
     SousCompetenceDto toDTO(SousCompetence sousCompetence);
