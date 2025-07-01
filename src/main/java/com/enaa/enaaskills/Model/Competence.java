@@ -12,19 +12,27 @@ public class Competence {
     @Column(nullable = false)
     private Long id;
     private String nom;
-    private String description;
+    private boolean statutAcquise;
 
-    @OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "competence")
     private List<SousCompetence> sousCompetences = new ArrayList<>();
 
     public Competence() {
     }
 
-    public Competence(Long id, String nom, String description, List<SousCompetence> sousCompetences) {
+    public Competence(Long id, String nom, boolean statutAcquise, List<SousCompetence> sousCompetences) {
         this.id = id;
         this.nom = nom;
-        this.description = description;
+        this.statutAcquise = statutAcquise;
         this.sousCompetences = sousCompetences;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -35,12 +43,12 @@ public class Competence {
         this.nom = nom;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean isStatutAcquise() {
+        return statutAcquise;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStatutAcquise(boolean statutAcquise) {
+        this.statutAcquise = statutAcquise;
     }
 
     public List<SousCompetence> getSousCompetences() {
@@ -49,13 +57,5 @@ public class Competence {
 
     public void setSousCompetences(List<SousCompetence> sousCompetences) {
         this.sousCompetences = sousCompetences;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
