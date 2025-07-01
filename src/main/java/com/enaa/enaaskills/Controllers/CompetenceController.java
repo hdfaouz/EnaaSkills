@@ -30,4 +30,9 @@ public class CompetenceController {
     public CompetenceDto update(@PathVariable Long id, @RequestBody CompetenceDto dto){
         return competenceService.update(id,dto);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        competenceService.supprimerCompetence(id);
+    }
 }
