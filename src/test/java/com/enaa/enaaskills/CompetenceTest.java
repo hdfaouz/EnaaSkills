@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @ExtendWith(MockitoExtension.class)
 public class CompetenceTest {
@@ -95,5 +96,7 @@ public class CompetenceTest {
         assertTrue(result.get(0).isStatutAcquise());
         assertFalse(result.get(1).isStatutAcquise());
     }
+
+
 
 }
