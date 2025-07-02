@@ -38,4 +38,17 @@ public class SousCompetenceService {
         List<SousCompetence> sousCompetences= sousCompetenceRepository.findAll();
         return sousCompetenceMap.toDTOs(sousCompetences);
     }
+
+    public SousCompetenceDto update(Long id, SousCompetenceDto sousCompetenceDto){
+        SousCompetence sousCompetence = sousCompetenceRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("SousCompetence not found"));
+
+        sousCompetence.setNom(sousCompetenceDto.getNom());
+        sousCompetence.setStatutValidation(sousCompetenceDto.isStatutValidation());
+        sousCompetence.setCompetence(sousCompetence.getCompetence());
+
+        SousCompetence savedsousCompetence = sousCompetenceRepository.save(sousCompetence);
+
+        return sousCompetenceMap.toDTO(savedsousCompetence);
+    }
 }

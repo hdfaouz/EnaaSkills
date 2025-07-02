@@ -25,4 +25,10 @@ public class SousCompetenceController {
     public List<SousCompetenceDto> getAll(){
         return sousCompetenceService.getAll();
     }
+
+    @PutMapping("/{id}")
+    public SousCompetenceDto update(@PathVariable Long id, @RequestBody SousCompetenceDto sousCompetenceDto){
+        return sousCompetenceService.update(id,sousCompetenceDto);
+    }
+
 }
