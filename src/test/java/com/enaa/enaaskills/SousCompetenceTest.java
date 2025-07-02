@@ -13,10 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -70,5 +71,40 @@ public class SousCompetenceTest {
         assertEquals("Programmation orientée objet", result.getNom());
         assertEquals(false, result.isStatutValidation());
         assertEquals(1L, result.getCompetenceId());
+    }
+
+    @Test
+    void afficher_DevraitRetournerListeSousCompetences() {
+        SousCompetence sousCompetence1 = new SousCompetence();
+        sousCompetence1.setNom("POO");
+        sousCompetence1.setStatutValidation(true);
+
+        SousCompetence sousCompetence2 = new SousCompetence();
+        sousCompetence2.setNom("Collections");
+        sousCompetence2.setStatutValidation(false);
+
+        List<SousCompetence> sousCompetences = Arrays.asList(sousCompetence1, sousCompetence2);
+
+        SousCompetenceDto dto1 = new SousCompetenceDto();
+        dto1.setNom("POO");
+        dto1.setStatutValidation(true);
+
+        SousCompetenceDto dto2 = new SousCompetenceDto();
+        dto2.setNom("Collections");
+        dto2.setStatutValidation(false);
+
+        List<SousCompetenceDto> expectedDtos = Arrays.asList(dto1, dto2);
+
+        when(sousCompetenceRepository.findAll()).thenReturn(sousCompetences);
+        when(sousCompetenceMap.toDTOs(sousCompetences)).thenReturn(expectedDtos);
+
+        List<SousCompetenceDto> result = sousCompetenceService.getAll();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("POO", result.get(0).getNom());
+        assertEquals("Collections", result.get(1).getNom());
+        assertTrue(result.get(0).isStatutValidation());
+        assertFalse(result.get(1).isStatutValidation());
     }
 }
