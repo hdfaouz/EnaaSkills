@@ -51,4 +51,8 @@ public class SousCompetenceService {
 
         return sousCompetenceMap.toDTO(savedsousCompetence);
     }
+
+    public void delete(Long id){
+        sousCompetenceRepository.deleteById(id);
+    }
 }
