@@ -11,8 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,6 +54,46 @@ public class CompetenceTest {
         assertNotNull(result);
         assertEquals("Java Programming", result.getNom());
         assertEquals(false, result.isStatutAcquise());
+    }
+
+
+    @Test
+    void afficher_DevraitRetournerListeCompetences() {
+
+        Competence competence1 = new Competence();
+
+        competence1.setNom("Java");
+        competence1.setStatutAcquise(true);
+
+        Competence competence2 = new Competence();
+        competence2.setNom("Spring");
+        competence2.setStatutAcquise(false);
+
+        List<Competence> competences = Arrays.asList(competence1, competence2);
+
+        CompetenceDto dto1 = new CompetenceDto();
+
+        dto1.setNom("Java");
+        dto1.setStatutAcquise(true);
+
+        CompetenceDto dto2 = new CompetenceDto();
+        dto2.setNom("Spring");
+        dto2.setStatutAcquise(false);
+
+        List<CompetenceDto> expectedDtos = Arrays.asList(dto1, dto2);
+
+
+        when(competenceRepository.findAll()).thenReturn(competences);
+        when(competenceMap.toDTOs(competences)).thenReturn(expectedDtos);
+
+        List<CompetenceDto> result = competenceService.getAllCompetences();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Java", result.get(0).getNom());
+        assertEquals("Spring", result.get(1).getNom());
+        assertTrue(result.get(0).isStatutAcquise());
+        assertFalse(result.get(1).isStatutAcquise());
     }
 
 }
