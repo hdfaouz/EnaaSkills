@@ -1,29 +1,23 @@
 package com.enaa.enaaskills.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class SousCompetence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
     private String nom;
     private boolean statutValidation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "competence_id", nullable = false)
+    @ManyToOne
     private Competence competence;
 
-    public SousCompetence() {
-    }
 
-    public SousCompetence(Long id, String nom, boolean statutValidation, Competence competence) {
-        this.id = id;
-        this.nom = nom;
-        this.statutValidation = statutValidation;
-        this.competence = competence;
-    }
 
     public Long getId() {
         return id;

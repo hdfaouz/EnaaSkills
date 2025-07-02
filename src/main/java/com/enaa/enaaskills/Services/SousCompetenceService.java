@@ -2,7 +2,9 @@ package com.enaa.enaaskills.Services;
 
 import com.enaa.enaaskills.Dto.SousCompetenceDto;
 import com.enaa.enaaskills.Mappers.SousCompetenceMap;
+import com.enaa.enaaskills.Model.Competence;
 import com.enaa.enaaskills.Model.SousCompetence;
+import com.enaa.enaaskills.Repositories.CompetenceRepository;
 import com.enaa.enaaskills.Repositories.SousCompetenceRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +13,21 @@ public class SousCompetenceService {
 
     private final SousCompetenceRepository sousCompetenceRepository;
     private final SousCompetenceMap sousCompetenceMap;
+    private final CompetenceRepository competenceRepository;
 
-    public SousCompetenceService(SousCompetenceRepository sousCompetenceRepository, SousCompetenceMap sousCompetenceMap) {
+    public SousCompetenceService(SousCompetenceRepository sousCompetenceRepository, SousCompetenceMap sousCompetenceMap, CompetenceRepository competenceRepository) {
         this.sousCompetenceRepository = sousCompetenceRepository;
         this.sousCompetenceMap = sousCompetenceMap;
+        this.competenceRepository = competenceRepository;
     }
 
-    public SousCompetenceDto ajouterSousCompetence(SousCompetenceDto sousCompetenceDto){
-        SousCompetence sousCompetence = sousCompetenceMap.toEntity(sousCompetenceDto);
-        SousCompetence savedSousCompetence= sousCompetenceRepository.save(sousCompetence);
-        return sousCompetenceMap.toDTO(savedSousCompetence);
+    public SousCompetenceDto Ajouter(SousCompetenceDto dto){
+        SousCompetence sousCompetence = sousCompetenceMap.toEntity(dto);
+        if (dto.getCompetenceId() != null){
+            Competence competence = competenceRepository.findById(dto.getCompetenceId())
+                    .orElseThrow(()-> new RuntimeException("Competence introuvable"));
+            sousCompetence.setCompetence(competence);
+        }
+        return sousCompetenceMap.toDTO(sousCompetenceRepository.save(sousCompetence));
     }
 }

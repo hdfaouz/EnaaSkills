@@ -19,6 +19,6 @@ public class SousCompetenceController {
 
     @PostMapping
     public SousCompetenceDto ajouterSousCompetence( @RequestBody SousCompetenceDto sousCompetenceDto){
-        return sousCompetenceService.ajouterSousCompetence(sousCompetenceDto);
+        return sousCompetenceService.Ajouter(sousCompetenceDto);
     }
 }
