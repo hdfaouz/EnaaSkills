@@ -1,5 +1,6 @@
 package com.enaa.enaaskills.Services;
 
+import com.enaa.enaaskills.Dto.CompetenceDto;
 import com.enaa.enaaskills.Dto.SousCompetenceDto;
 import com.enaa.enaaskills.Mappers.SousCompetenceMap;
 import com.enaa.enaaskills.Model.Competence;
@@ -7,6 +8,8 @@ import com.enaa.enaaskills.Model.SousCompetence;
 import com.enaa.enaaskills.Repositories.CompetenceRepository;
 import com.enaa.enaaskills.Repositories.SousCompetenceRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SousCompetenceService {
@@ -29,5 +32,10 @@ public class SousCompetenceService {
             sousCompetence.setCompetence(competence);
         }
         return sousCompetenceMap.toDTO(sousCompetenceRepository.save(sousCompetence));
+    }
+
+    public List<SousCompetenceDto> getAll(){
+        List<SousCompetence> sousCompetences= sousCompetenceRepository.findAll();
+        return sousCompetenceMap.toDTOs(sousCompetences);
     }
 }
