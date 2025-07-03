@@ -36,4 +36,9 @@ public class SousCompetenceController {
         sousCompetenceService.delete(id);
     }
 
+    @PatchMapping("/{id}")
+    public SousCompetenceDto getCom(@PathVariable Long id, @RequestParam boolean isValid){
+        return sousCompetenceService.updateValidation(id,isValid);
+    }
+
 }

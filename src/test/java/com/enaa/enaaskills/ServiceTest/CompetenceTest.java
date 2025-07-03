@@ -1,4 +1,4 @@
-package com.enaa.enaaskills;
+package com.enaa.enaaskills.ServiceTest;
 
 import com.enaa.enaaskills.Dto.CompetenceDto;
 import com.enaa.enaaskills.Mappers.CompetenceMap;
@@ -16,7 +16,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @ExtendWith(MockitoExtension.class)
 public class CompetenceTest {

@@ -1,4 +1,4 @@
-package com.enaa.enaaskills;
+package com.enaa.enaaskills.ServiceTest;
 
 import com.enaa.enaaskills.Dto.SousCompetenceDto;
 import com.enaa.enaaskills.Mappers.SousCompetenceMap;
@@ -107,4 +107,5 @@ public class SousCompetenceTest {
         assertTrue(result.get(0).isStatutValidation());
         assertFalse(result.get(1).isStatutValidation());
     }
+
 }

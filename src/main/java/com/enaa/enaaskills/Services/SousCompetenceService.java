@@ -52,6 +52,14 @@ public class SousCompetenceService {
         return sousCompetenceMap.toDTO(savedsousCompetence);
     }
 
+    public SousCompetenceDto updateValidation(Long id, boolean isValidated){
+       SousCompetence subCompetence = sousCompetenceRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("SubCompetence not found"));
+        subCompetence.setStatutValidation(isValidated);
+        SousCompetence saved = sousCompetenceRepository.save(subCompetence);
+        return sousCompetenceMap.toDTO(saved);
+    }
+
     public void delete(Long id){
         sousCompetenceRepository.deleteById(id);
     }

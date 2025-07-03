@@ -20,6 +20,18 @@ public class Competence {
     @OneToMany(mappedBy = "competence")
     private List<SousCompetence> sousCompetences = new ArrayList<>();
 
+     public boolean SimpleIsAcquired(){
+        if(sousCompetences  == null || sousCompetences .isEmpty()){
+            return false;
+        }
+        for (SousCompetence  sc: sousCompetences ){
+            if (!sc.isStatutValidation()){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public Long getId() {
         return id;
