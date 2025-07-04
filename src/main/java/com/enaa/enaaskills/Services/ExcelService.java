@@ -38,8 +38,8 @@ public class ExcelService {
             // Ligne d'en-tête
             Row headerRow = sheet.createRow(0);
             String[] headers = {
-                    "ID Compétence", "Code", "Titre Compétence",
-                    "ID Sous-Compétence", "Titre Sous-Compétence", "Validation"
+                    "ID Compétence", "Nom Compétence",
+                    "ID Sous-Compétence", "Nom Sous-Compétence", "Validation"
             };
 
             for (int i = 0; i < headers.length; i++) {
@@ -48,7 +48,7 @@ public class ExcelService {
                 cell.setCellStyle(headerStyle);
             }
 
-            // Données
+
             int rowNum = 1;
             for (Competence competence : competences) {
                 for (SousCompetence sousCompetence : competence.getSousCompetences()) {
