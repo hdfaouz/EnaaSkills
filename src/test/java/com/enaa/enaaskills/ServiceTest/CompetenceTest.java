@@ -86,7 +86,7 @@ public class CompetenceTest {
         when(competenceRepository.findAll()).thenReturn(competences);
         when(competenceMap.toDTOs(competences)).thenReturn(expectedDtos);
 
-        List<CompetenceDto> result = competenceService.getAllCompetences();
+        List<Competence> result = competenceService.ListCompetence();
 
         assertNotNull(result);
         assertEquals(2, result.size());

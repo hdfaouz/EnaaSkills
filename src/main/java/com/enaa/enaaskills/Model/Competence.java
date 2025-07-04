@@ -64,4 +64,6 @@ public class Competence {
     public void setSousCompetences(List<SousCompetence> sousCompetences) {
         this.sousCompetences = sousCompetences;
     }
+
+
 }

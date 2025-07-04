@@ -24,10 +24,14 @@ public class CompetenceService {
         return competenceMap.toDTO(saveCompetence);
     }
 
-    public List<CompetenceDto> getAllCompetences(){
-        List<Competence> competences = competenceRepository.findAll();
-        return competenceMap.toDTOs(competences);
-    }
+//    public List<CompetenceDto> getAllCompetences(){
+//        List<Competence> competences = competenceRepository.findAll();
+//        return competenceMap.toDTOs(competences);
+//    }
+    public List<Competence> ListCompetence() {
+       return competenceRepository.findAll();
+}
+
 
 
     public CompetenceDto update(Long id, CompetenceDto competenceDto){
